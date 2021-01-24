@@ -1,5 +1,6 @@
 import Node from './Node';
 
+// implement queue using array
 class Queue<T> {
   private list: Array<T> = [];
   private index: number = 0;
@@ -27,6 +28,7 @@ class Queue<T> {
   }
 }
 
+// implement queue using link
 class LinkQueue<T> {
   private index = 0;
   private first: Node<T> | null = null;
@@ -37,19 +39,18 @@ class LinkQueue<T> {
     if (this.index === 0) {
       this.first = node;
     } else {
-      const preLast = this.last;
-      preLast && (preLast.next = node);
+      this.last && (this.last.next = node);
     }
     this.last = node;
     this.index++;
   }
 
   public dequeue(): undefined | T {
-    const preFirst: Node<T> | null = this.first;
+    const item: Node<T> | null = this.first;
     this.index--;
     this.first && (this.first = this.first.next);
-    preFirst && (preFirst.next = null);
-    return preFirst ? preFirst.value : undefined;
+    item && (item.next = null);
+    return item ? item.value : undefined;
   }
 
   public size(): number {

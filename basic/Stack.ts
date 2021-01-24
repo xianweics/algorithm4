@@ -1,5 +1,6 @@
 import Node from './Node';
 
+// implement stack using array
 class Stack<T> {
   private list: Array<T> = [];
   private index: number = 0;
@@ -22,9 +23,10 @@ class Stack<T> {
   }
 }
 
+// implement stack using link
 class LinkStack<T> {
-  private list: Array<Node<T>> = [];
   private index: number = 0;
+  private head: Node<T> | null = null;
 
   public isEmpty(): boolean {
     return this.index === 0;
@@ -35,12 +37,19 @@ class LinkStack<T> {
   }
 
   public push(value: T): void {
-    this.list[this.index++] = new Node(value);
+    let node: Node<T> | null = new Node(value);
+    this.index !== 0 && (node.next = this.head);
+    this.head = node;
+    this.index++;
   }
 
   public pop(): T | undefined {
     if (this.index === 0) return undefined;
-    return this.list[--this.index].value;
+    const item = this.head;
+    this.head && (this.head = this.head.next);
+    item && (item.next = null);
+    this.index--;
+    return item ? item.value : undefined;
   }
 }
 

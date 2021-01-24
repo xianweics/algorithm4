@@ -1,5 +1,6 @@
 import Node from "./Node";
 
+// implement bag using array
 class Bag<T> {
   private list: Array<T> = [];
   private index: number = 0;
@@ -16,9 +17,9 @@ class Bag<T> {
     this.list[this.index++] = item;
   }
 
-
+  // custom iterator for 'for...of'
   public [Symbol.iterator]() {
-    let n = this.size();
+    let n = this.index;
     return {
       next: (): { value: T, done: false } | { value: undefined, done: true } => {
         n--;
@@ -38,8 +39,9 @@ class Bag<T> {
   }
 }
 
+// implement bag using link
 class LinkBag<T> {
-  private list: Array<Node<T>> = [];
+  private head: Node<T> | null = null;
   private index: number = 0;
 
   public isEmpty(): boolean {
@@ -51,17 +53,21 @@ class LinkBag<T> {
   }
 
   public add(value: T): void {
-    this.list[this.index++] = new Node(value);
+    let node: Node<T> | null = new Node(value);
+    this.index !== 0 && (node.next = this.head);
+    this.head = node;
+    this.index++;
   }
 
   public [Symbol.iterator]() {
-    let n = this.size();
+    let head = this.head;
     return {
       next: (): { value: T, done: false } | { value: undefined, done: true } => {
-        n--;
-        if (n >= 0) {
+        if (head) {
+          const value = head.value;
+          head = head.next;
           return {
-            value: this.list[n].value,
+            value: value,
             done: false
           }
         } else {
