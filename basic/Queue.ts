@@ -31,8 +31,8 @@ class Queue<T> {
 // implement queue using link
 class LinkQueue<T> {
   private index = 0;
-  private first: Node<T> | null = null;
-  private last: Node<T> | null = null;
+  private first: Node<T> | undefined;
+  private last: Node<T> | undefined;
 
   public enqueue(value: T): void {
     const node: Node<T> = new Node(value);
@@ -46,10 +46,10 @@ class LinkQueue<T> {
   }
 
   public dequeue(): undefined | T {
-    const item: Node<T> | null = this.first;
+    const item: Node<T> | undefined = this.first;
     this.index--;
     this.first && (this.first = this.first.next);
-    item && (item.next = null);
+    item && (item.next = undefined);
     return item ? item.value : undefined;
   }
 

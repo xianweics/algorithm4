@@ -4,8 +4,7 @@
   "description": "Algorithm",
   "scripts": {
     "build": "tsc",
-    "demo": "ts-node basic/UnionFind2.ts",
-    "demo:watch": "tsc basic/UnionFind2.ts --watch"
+    "demo": "ts-node basic/Stack.ts"
   },
   "author": "Xianwei Wu",
   "license": "MIT",

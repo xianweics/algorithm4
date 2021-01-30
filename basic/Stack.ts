@@ -26,7 +26,7 @@ class Stack<T> {
 // implement stack using link
 class LinkStack<T> {
   private index: number = 0;
-  private head: Node<T> | null = null;
+  private head: Node<T> | undefined;
 
   public isEmpty(): boolean {
     return this.index === 0;
@@ -37,7 +37,7 @@ class LinkStack<T> {
   }
 
   public push(value: T): void {
-    let node: Node<T> | null = new Node(value);
+    let node: Node<T> = new Node(value);
     this.index !== 0 && (node.next = this.head);
     this.head = node;
     this.index++;
@@ -47,7 +47,7 @@ class LinkStack<T> {
     if (this.index === 0) return undefined;
     const item = this.head;
     this.head && (this.head = this.head.next);
-    item && (item.next = null);
+    item && (item.next = undefined);
     this.index--;
     return item ? item.value : undefined;
   }

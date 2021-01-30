@@ -1,12 +1,7 @@
-type TObject = {
-  id: string,
-  index: number,
-  data: string
-};
-type TListObject = Array<TObject>;
-type TObjectKeys = keyof TObject;
+/// <reference path = "../typings/unionFind.d.ts" />
 
-class UnionFindIndex<T extends number> {
+// unionfind with Number
+class UnionFindNumber<T extends number> {
   private readonly list: Array<T> = [];
   private n: number = 0;
 
@@ -45,7 +40,7 @@ const list: Array<number> = [];
 for (let i = 0; i < 10; i++) {
   list[i] = i;
 }
-const unionFind = new UnionFindIndex<number>(list);
+const unionFind = new UnionFindNumber<number>(list);
 console.info(`total count:${unionFind.count()}`);
 unionFind.union(0, 1);
 console.info(`0,1 connected; total count:${unionFind.count()}`);
@@ -53,6 +48,7 @@ unionFind.union(0, 2);
 console.info(`0,2 connected; total count:${unionFind.count()}`);
 console.info(`1,2 is connected: ${unionFind.connected(1, 2)}`);
 
+// unionfind with Object
 class UnionFindObject<T extends TListObject, K extends TObjectKeys> {
   private readonly list: TListObject;
   private n: number;
@@ -94,7 +90,6 @@ class UnionFindObject<T extends TListObject, K extends TObjectKeys> {
     return this.n;
   }
 }
-
 
 const listObject: TListObject = [];
 for (let i = 0; i < 10; i++) {

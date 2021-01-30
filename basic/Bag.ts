@@ -41,7 +41,7 @@ class Bag<T> {
 
 // implement bag using link
 class LinkBag<T> {
-  private head: Node<T> | null = null;
+  private head: Node<T> | undefined;
   private index: number = 0;
 
   public isEmpty(): boolean {
@@ -53,7 +53,7 @@ class LinkBag<T> {
   }
 
   public add(value: T): void {
-    let node: Node<T> | null = new Node(value);
+    let node: Node<T> = new Node(value);
     this.index !== 0 && (node.next = this.head);
     this.head = node;
     this.index++;
@@ -92,3 +92,5 @@ for (let i = 0; i < 3; i++) {
 for (const item of bag) {
   console.info(`item: ${item}`);
 }
+
+console.info(`bag is emptry: ${bag.isEmpty()}`);
